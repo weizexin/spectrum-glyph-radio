@@ -97,6 +97,7 @@ python receiveData_gnuradio.py --sample-rate 2000000 --fft-len 512
 
 ## 许可证与署名
 
+鸣谢@StevenLeePP 提供的原型代码帮助
 Copyright © 2026 **BI1WJD**。
 
 本项目中 BI1WJD 的原创内容采用 **[知识共享 署名—相同方式共享 4.0 国际许可协议（CC BY-SA 4.0）](https://creativecommons.org/licenses/by-sa/4.0/deed.zh)**。允许分享和改编，包括商业用途；使用时须注明 BI1WJD、提供许可链接并说明修改，发布改编内容时须遵循协议的相同方式共享要求。
