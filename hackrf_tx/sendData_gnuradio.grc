@@ -1,0 +1,546 @@
+options:
+  parameters:
+    author: ''
+    catch_exceptions: 'True'
+    category: Custom
+    cmake_opt: ''
+    comment: ''
+    copyright: ''
+    description: Visual OFDM HackRF One transmitter; Run opens the compact dynamic-control UI.
+    gen_cmake: 'On'
+    gen_linking: dynamic
+    generate_options: qt_gui
+    hier_block_src_path: '.:'
+    id: sendData_gnuradio
+    max_nouts: '0'
+    output_language: python
+    placement: (0,0)
+    qt_qss_theme: ''
+    realtime_scheduling: ''
+    run: 'True'
+    run_command: '{python} -u sendData_gnuradio_ui.py'
+    run_options: prompt
+    sizing_mode: fixed
+    thread_safe_setters: ''
+    title: Visual OFDM — HackRF One Transmitter
+    window_size: (1000,1000)
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 608
+    - 16.0
+    rotation: 0
+    state: enabled
+blocks:
+- name: active_subcarriers
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 3,0,1,1
+    label: '"Occupied subcarriers"'
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: int
+    start: '32'
+    step: '2'
+    stop: '510'
+    value: '510'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 16
+    - 404
+    rotation: 0
+    state: enabled
+- name: amplitude
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 2,0,1,1
+    label: '"Active-subcarrier amplitude"'
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0.0'
+    step: '0.1'
+    stop: '7.0'
+    value: '7.0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 16
+    - 292
+    rotation: 0
+    state: enabled
+- name: center_frequency
+  id: variable_qtgui_entry
+  parameters:
+    comment: ''
+    entry_signal: editingFinished
+    gui_hint: 0,0,1,1
+    label: '"RF center frequency (Hz)"'
+    type: real
+    value: 435e6
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1096
+    - 20.0
+    rotation: 0
+    state: enabled
+- name: fft_len
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: 1,1,1,1
+    label: '"OFDM FFT length"'
+    label0: ''
+    label1: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    labels: '["512", "1024", "2048", "4096", "8192"]'
+    num_opts: '0'
+    option0: '0'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[512, 1024, 2048, 4096, 8192]'
+    orient: Qt.QVBoxLayout
+    type: int
+    value: '512'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 16
+    - 236
+    rotation: 0
+    state: enabled
+- name: font_family
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: 5,0,1,1
+    label: '"Font family"'
+    label0: ''
+    label1: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    labels: '["宋体", "微软雅黑", "楷体", "仿宋"]'
+    num_opts: '0'
+    option0: '0'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '["SimSun", "Microsoft YaHei", "KaiTi", "FangSong"]'
+    orient: Qt.QVBoxLayout
+    type: string
+    value: '''Microsoft YaHei'''
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 224
+    - 520.0
+    rotation: 0
+    state: enabled
+- name: image_path
+  id: variable_qtgui_entry
+  parameters:
+    comment: ''
+    entry_signal: editingFinished
+    gui_hint: 6,0,1,2
+    label: '"Image path"'
+    type: string
+    value: '''RandomMan.jpg'''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 424
+    - 520.0
+    rotation: 0
+    state: enabled
+- name: occupied_bandwidth
+  id: variable_qtgui_label
+  parameters:
+    comment: ''
+    formatter: 'lambda x: "Occupied band, centred at DC (DC nulled): {:.3f} kHz".format(x / 1e3)'
+    gui_hint: 3,1,1,1
+    label: '""'
+    type: real
+    value: active_subcarriers*sample_rate/fft_len
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 632
+    - 536.0
+    rotation: 0
+    state: enabled
+- name: payload_mode
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: 4,0,1,1
+    label: '"Payload mode"'
+    label0: ''
+    label1: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    labels: '["Built-in Hanzi", "Text", "Image file"]'
+    num_opts: '0'
+    option0: '0'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[0, 1, 2]'
+    orient: Qt.QVBoxLayout
+    type: int
+    value: '0'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 16
+    - 516
+    rotation: 0
+    state: enabled
+- name: pixel_size
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: 5,1,1,1
+    label: '"Text pixel size"'
+    label0: ''
+    label1: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    labels: '["16 × 16", "32 × 32"]'
+    num_opts: '0'
+    option0: '0'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[16, 32]'
+    orient: Qt.QVBoxLayout
+    type: int
+    value: '32'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 1368
+    - 16.0
+    rotation: 0
+    state: enabled
+- name: hackrf_device_args
+  id: variable
+  parameters:
+    comment: ''
+    value: ''''''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 336
+    - 24.0
+    rotation: 0
+    state: enabled
+- name: row_hold_ms
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 2,1,1,1
+    label: '"Transmit time per row (ms)"'
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: int
+    start: '1000'
+    step: '100'
+    stop: '10000'
+    value: '6000'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 16
+    - 0.0
+    rotation: 0
+    state: enabled
+- name: sample_rate
+  id: variable_qtgui_chooser
+  parameters:
+    comment: ''
+    gui_hint: 0,1,1,1
+    label: '"Baseband sample rate (live)"'
+    label0: ''
+    label1: ''
+    label2: ''
+    label3: ''
+    label4: ''
+    labels: '["2 MS/s - HackRF minimum", "4 MS/s", "8 MS/s", "10 MS/s", "12 MS/s", "16 MS/s", "20 MS/s"]'
+    num_opts: '0'
+    option0: '0'
+    option1: '1'
+    option2: '2'
+    option3: '3'
+    option4: '4'
+    options: '[2000000, 4000000, 8000000, 10000000, 12000000, 16000000, 20000000]'
+    orient: Qt.QVBoxLayout
+    type: int
+    value: '2000000'
+    widget: combo_box
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 16
+    - 124
+    rotation: 0
+    state: enabled
+- name: text_message
+  id: variable_qtgui_entry
+  parameters:
+    comment: ''
+    entry_signal: editingFinished
+    gui_hint: 4,1,1,1
+    label: '"Text to transmit"'
+    type: string
+    value: '''欢迎报考北京邮电大学'''
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 792
+    - 528.0
+    rotation: 0
+    state: enabled
+- name: tx_vga
+  id: variable_qtgui_range
+  parameters:
+    comment: ''
+    gui_hint: 1,0,1,1
+    label: '"HackRF TX VGA gain (dB)"'
+    min_len: '200'
+    orient: QtCore.Qt.Horizontal
+    rangeType: float
+    start: '0.0'
+    step: '1.0'
+    stop: '47.0'
+    value: '47.0'
+    widget: counter_slider
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 880
+    - 8.0
+    rotation: 0
+    state: enabled
+- name: epy_block_0
+  id: epy_block
+  parameters:
+    _source_code: "\"\"\"Self-contained source for the active Hanzi MATLAB Function branch.\"\"\"\nfrom pathlib import Path\nimport re\nimport sys\nimport numpy as np\nfrom gnuradio import gr\nfrom PyQt5.QtCore import Qt\nfrom PyQt5.QtGui import QColor, QFont, QImage, QPainter\n\nPROJECT_DIR = Path(globals().get(\"__file__\", Path.cwd() / \"_\")).resolve().parent\nclass blk(gr.sync_block):\n    \"\"\"Visual OFDM source with a DC-null, centred occupied band.\"\"\"\n\n    def __init__(self, fft_len=4096, amplitude=7.0, row_hold_ms=15,\n                 active_subcarriers=256, payload_mode=0,\n                 text_message='你好，GNU Radio', font_family='Microsoft YaHei',\n                 pixel_size=32, image_path='', sample_rate=4096000):\n        gr.sync_block.__init__(self, name=\"Visual OFDM source\", in_sig=None, out_sig=[np.complex64])\n        self._ready = False\n        self.fft_len = int(fft_len)\n        self.amplitude = float(amplitude)\n        self.row_hold_ms = float(row_hold_ms)\n        self.active_subcarriers = int(active_subcarriers)\n        self.payload_mode = int(payload_mode)\n        self.text_message = str(text_message)\n        self.font_family = str(font_family)\n        self.pixel_size = int(pixel_size)\n        self.image_path = str(image_path)\n        self.sample_rate = float(sample_rate)\n        self._row_index = 0\n        self._repeat_index = 0\n        self._sample_offset = 0\n        self._ready = True\n        self._rebuild()\n\n    def __setattr__(self, name, value):\n        object.__setattr__(self, name, value)\n        if name in ('fft_len', 'amplitude', 'row_hold_ms', 'active_subcarriers',\n                    'payload_mode', 'text_message', 'font_family', 'pixel_size',\n                    'image_path', 'sample_rate') and getattr(self, '_ready', False):\n            self._rebuild()\n\n    def _payload(self):\n        candidates = (Path.cwd() / \"hanzi.m\",\n                      Path(sys.argv[0]).resolve().parent / \"hanzi.m\",\n                      PROJECT_DIR / \"hanzi.m\")\n        hanzi_file = next((path for path in candidates if path.is_file()), candidates[-1])\n        source = hanzi_file.read_text(encoding=\"utf-8\")\n        groups = re.findall(r\"B[1-6]\\s*=\\s*\\[(.*?)\\];\", source, flags=re.DOTALL)\n        if len(groups) != 6:\n            raise RuntimeError(\"Cannot read B1...B6 from \" + str(hanzi_file))\n        glyphs = []\n        for group in groups:\n            packed = np.asarray([int(x, 16) for x in re.findall(r\"0x[0-9a-fA-F]{2}\", group)], dtype=np.uint8)\n            glyphs.append(np.unpackbits(packed).reshape(32, 32).astype(np.float32))\n        text = np.hstack(glyphs)\n        padded = np.zeros((32, 256), dtype=np.float32)\n        padded[:, 32:224] = text\n        return np.vstack((np.zeros((16, 256), dtype=np.float32), padded))\n\n    @staticmethod\n    def _array_from_qimage(image):\n        image = image.convertToFormat(QImage.Format_Grayscale8)\n        ptr = image.bits()\n        ptr.setsize(image.byteCount())\n        rows = np.frombuffer(ptr, dtype=np.uint8).reshape(image.height(), image.bytesPerLine())\n        return rows[:, :image.width()].astype(np.float32) / 255.0\n\n    @staticmethod\n    def _fit_width(image, width):\n        if image.shape[1] == width:\n            return image\n        column_map = np.rint(np.linspace(0, image.shape[1] - 1, width)).astype(int)\n        return image[:, column_map]\n\n    def _text_payload(self, width):\n        height = int(self.pixel_size)\n        image = QImage(width, height, QImage.Format_ARGB32)\n        image.fill(0)\n        painter = QPainter(image)\n        painter.setPen(QColor(255, 255, 255))\n        font = QFont(str(self.font_family))\n        font.setPixelSize(max(1, height - 2))\n        painter.setFont(font)\n        painter.drawText(0, height - 2, str(self.text_message))\n        painter.end()\n        return np.pad(self._array_from_qimage(image), ((2, 2), (0, 0)))\n\n    def _image_payload(self, width):\n        image_path = Path(self.image_path)\n        if not image_path.is_absolute():\n            image_path = Path(sys.argv[0]).resolve().parent / image_path\n        image = QImage(str(image_path))\n        if image.isNull():\n            raise RuntimeError('Cannot open image: ' + str(self.image_path))\n        image = image.convertToFormat(QImage.Format_Grayscale8)\n        image = image.scaledToWidth(width, Qt.SmoothTransformation)\n        return np.pad(self._array_from_qimage(image), ((2, 2), (0, 0)))\n\n    def _rebuild(self):\n        fft_len = int(self.fft_len)\n        if fft_len < 512 or fft_len & (fft_len - 1):\n            raise ValueError('FFT length must be a power of two and at least 512')\n        width = int(self.active_subcarriers)\n        if width < 2 or width > fft_len - 1:\n            raise ValueError('Occupied subcarrier count does not fit in this FFT length')\n        width -= width % 2  # Equal negative/positive halves; DC remains unused.\n        if int(self.payload_mode) == 1:\n            payload = self._text_payload(width)\n        elif int(self.payload_mode) == 2:\n            payload = self._image_payload(width)\n        else:\n            payload = self._fit_width(self._payload(), width)\n        frequency_rows = np.zeros((payload.shape[0], fft_len), dtype=np.float32)\n        left = width // 2\n        right = width - left\n        # Native IFFT ordering: [DC, +f ... -f].  Split the picture\n        # about DC instead of wrapping it across index zero.  A receiver\n        # that displays fftshift(fft(x)) sees one centred, contiguous image.\n        frequency_rows[:, fft_len-left:fft_len] = payload[:, :left] * float(self.amplitude)\n        frequency_rows[:, 1:1+right] = payload[:, left:] * float(self.amplitude)\n        # Blank picture rows stay exact digital zeros: the RF output drops\n        # to the leakage floor there, so the gaps between picture lines are\n        # silent and stay dark in a receive waterfall.  Only the overall\n        # scale is normalised, which preserves every row-to-row ratio.\n        self._symbols = np.fft.ifft(frequency_rows.astype(np.complex64),\n                                    axis=1).astype(np.complex64)\n        peak = float(np.max(np.abs(self._symbols)))\n        if peak > 0.9:\n            self._symbols *= np.float32(0.9 / peak)\n        # 峰值归一化会把稀疏文字/图像 OFDM 的平均功率压到 DAC 满量程以下约 30 dB\n        # (峰均比)，空口链路因此收不到。这里把整体 RMS 提升到固定目标电平，再对\n        # 极少数尖峰限幅(实测 <0.2% 样本)。整体乘同一增益: 行间亮度比例不变，\n        # 空白行仍然是精确的数字零。\n        rms = float(np.sqrt(np.mean(np.abs(self._symbols) ** 2)))\n        if rms > 0:\n            boost = min(0.10 / rms, 8.0)\n            if boost > 1.0:\n                self._symbols *= np.float32(boost)\n                self._symbols.real = np.clip(self._symbols.real, -0.95, 0.95)\n                self._symbols.imag = np.clip(self._symbols.imag, -0.95, 0.95)\n        self._row_order = list(range(self._symbols.shape[0] - 1, 0, -1))\n        self._row_index = self._repeat_index = self._sample_offset = 0\n\n    def work(self, input_items, output_items):\n        output = output_items[0]\n        written = 0\n        while written < len(output):\n            symbol = self._symbols[self._row_order[self._row_index]]\n            count = min(len(output) - written, int(self.fft_len) - self._sample_offset)\n            output[written:written + count] = symbol[self._sample_offset:self._sample_offset + count]\n            written += count\n            self._sample_offset += count\n            if self._sample_offset == int(self.fft_len):\n                self._sample_offset = 0\n                self._repeat_index += 1\n                repeats = max(1, int(round(self.row_hold_ms * self.sample_rate / (1000.0 * self.fft_len))))\n                if self._repeat_index == repeats:\n                    self._repeat_index = 0\n                    self._row_index = (self._row_index + 1) % len(self._row_order)\n        return written"
+    active_subcarriers: active_subcarriers
+    affinity: ''
+    alias: ''
+    amplitude: amplitude
+    comment: 'Self-contained visual OFDM source: centred occupied band with a DC null; text/image changes
+      take effect immediately.'
+    fft_len: fft_len
+    font_family: font_family
+    image_path: image_path
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    payload_mode: payload_mode
+    pixel_size: pixel_size
+    row_hold_ms: row_hold_ms
+    sample_rate: sample_rate
+    text_message: text_message
+  states:
+    _io_cache: ('Visual OFDM source', 'blk', [('fft_len', '4096'), ('amplitude', '7.0'), ('row_hold_ms',
+      '70'), ('active_subcarriers', '256'), ('payload_mode', '0'), ('text_message', "'你好，GNU Radio'"),
+      ('font_family', "'Microsoft YaHei'"), ('pixel_size', '32'), ('image_path', "''"), ('sample_rate',
+      '4096000')], [], [('0', 'complex', 1)], 'Visual OFDM source with a DC-null, centred occupied band.',
+      ['active_subcarriers', 'amplitude', 'fft_len', 'font_family', 'image_path', 'payload_mode', 'pixel_size',
+      'row_hold_ms', 'sample_rate', 'text_message'])
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 352
+    - 296
+    rotation: 0
+    state: enabled
+- name: qtgui_freq_sink_x_0
+  id: qtgui_freq_sink_x
+  parameters:
+    affinity: ''
+    alias: ''
+    alpha1: '1.0'
+    alpha10: '1.0'
+    alpha2: '1.0'
+    alpha3: '1.0'
+    alpha4: '1.0'
+    alpha5: '1.0'
+    alpha6: '1.0'
+    alpha7: '1.0'
+    alpha8: '1.0'
+    alpha9: '1.0'
+    autoscale: 'False'
+    average: '0.1'
+    axislabels: 'True'
+    bw: sample_rate
+    color1: '"blue"'
+    color10: '"dark blue"'
+    color2: '"red"'
+    color3: '"green"'
+    color4: '"black"'
+    color5: '"cyan"'
+    color6: '"magenta"'
+    color7: '"yellow"'
+    color8: '"dark red"'
+    color9: '"dark green"'
+    comment: Baseband spectrum before the HackRF sink; active band is centred at 0 Hz and DC is nulled.
+    ctrlpanel: 'False'
+    fc: '0'
+    fftsize: fft_len
+    freqhalf: 'True'
+    grid: 'True'
+    gui_hint: 7,0,1,2
+    label: Relative amplitude
+    label1: '"OFDM baseband"'
+    label10: ''''''
+    label2: ''''''
+    label3: ''''''
+    label4: ''''''
+    label5: ''''''
+    label6: ''''''
+    label7: ''''''
+    label8: ''''''
+    label9: ''''''
+    legend: 'True'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    name: '"Baseband spectrum — occupied band centred at DC (DC nulled)"'
+    nconnections: '1'
+    norm_window: 'False'
+    showports: 'False'
+    tr_chan: '0'
+    tr_level: '0.0'
+    tr_mode: qtgui.TRIG_MODE_FREE
+    tr_tag: '""'
+    type: complex
+    units: dB
+    update_time: '0.10'
+    width1: '1'
+    width10: '1'
+    width2: '1'
+    width3: '1'
+    width4: '1'
+    width5: '1'
+    width6: '1'
+    width7: '1'
+    width8: '1'
+    width9: '1'
+    wintype: window.WIN_BLACKMAN_hARRIS
+    ymax: '-30'
+    ymin: '-90'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 736
+    - 392
+    rotation: 0
+    state: enabled
+- name: blocks_complex_to_interleaved_char_0
+  id: blocks_complex_to_interleaved_char
+  parameters:
+    affinity: ''
+    alias: ''
+    scale_factor: '127.0'
+    vector_output: 'True'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 736
+    - 248
+    rotation: 0
+    state: enabled
+- name: soapy_hackrf_sink_0
+  id: soapy_hackrf_sink
+  parameters:
+    affinity: ''
+    alias: ''
+    amp: 'True'
+    bandwidth: '{2000000: 1750000, 4000000: 3500000, 8000000: 7000000, 10000000: 9000000, 12000000: 12000000, 16000000: 15000000, 20000000: 20000000}[sample_rate]'
+    center_freq: center_frequency
+    comment: HackRF One TX; RF AMP enabled and VGA at maximum by default.
+    dev_args: hackrf_device_args
+    samp_rate: sample_rate
+    type: sc8
+    vga: tx_vga
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate:
+    - 736
+    - 264
+    rotation: 0
+    state: enabled
+connections:
+- - epy_block_0
+  - '0'
+  - qtgui_freq_sink_x_0
+  - '0'
+- - epy_block_0
+  - '0'
+  - blocks_complex_to_interleaved_char_0
+  - '0'
+- - blocks_complex_to_interleaved_char_0
+  - '0'
+  - soapy_hackrf_sink_0
+  - '0'
+metadata:
+  file_format: 1
+  grc_version: 3.10.12.0
